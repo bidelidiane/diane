@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        padding:0px;
+        margin:0px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+        background-color: whitesmoke;
+    }
+    .container{
+        background-color: white;
+        position: relative;
+        left:600px;
+        top:200px;
+        width:500px;
+        height:300px;
+        border-radius: 20px;
+        box-shadow: 0 0 10px black;
+        padding:20px;
+    }
+    form{
+        position: relative;
+        left:150px;
+    }
+    .container label{
+        display:block;
+    }
+    .container input{
+        width:200px;
+
+    }
+    .btn{
+        background-color: teal;
+        color:white;
+
+    }
+    .btn:hover{
+        cursor:pointer;
+        transition: 0.5s;
+        background-color: green;
+
+    }
+</style>
+<body>
+    <div class="container">
+        <form method="POST">
+            <h1>signup</h1><br>
+            <label>u_name:</label>
+            <input type="text"name="u_name"placeholder="enter u_name"><br>
+            <label>u_password:</label>
+            <input type="u_password"name="u_password"placeholder="enter u_password"><br><br>
+            <input type="submit"name="send"value="send"class="btn"><br><br>
+            <p>do you have an acc?</p>
+            <?php
+            include 'connect.php';
+            if(isset($_POST['send'])){
+                $u_name=$_POST['u_name'];
+                $u_password=$_POST['u_password'];
+                $query=$conn->query("INSERT INTO users VALUES('','$u_name','$u_password')");
+                if($query){
+                    echo"<script>alert ('inserted');
+                    window.location.replace('login.php');</script>";
+                }else{
+                    echo"failed";
+                }
+
+            }
+            ?>
+
+        </form>
+    </div>
+</body>
+</html>
